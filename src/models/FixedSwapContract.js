@@ -4,6 +4,7 @@ import ERC20TokenContract from "./ERC20TokenContract";
 import Numbers from "../utils/Numbers";
 import _ from "lodash";
 import moment from 'moment';
+const RESIDUAL_TOKEN = 0.00001;
 /**
  * Fixed Swap Object
  * @constructor FixedSwapContract
@@ -655,14 +656,18 @@ class FixedSwapContract {
 	 */
 
 	swap = async ({ tokenAmount, callback }) => {
+
 		let amountWithDecimals = Numbers.toSmartContractDecimals(
-			tokenAmount,
+			parseFloat(tokenAmount),
 			this.getDecimals()
 		);
+		
 		let ETHCost = await this.getETHCostFromTokens({
 			tokenAmount,
 		});
+
 		let ETHToWei = Numbers.toSmartContractDecimals(ETHCost, 18);
+		
 		return await this.__sendTx(
 			this.params.contract.getContract().methods.swap(amountWithDecimals),
 			false,
