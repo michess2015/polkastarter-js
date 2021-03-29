@@ -4,7 +4,6 @@ import ERC20TokenContract from "./ERC20TokenContract";
 import Numbers from "../utils/Numbers";
 import _ from "lodash";
 import moment from 'moment';
-const RESIDUAL_TOKEN = 0.00001;
 /**
  * Fixed Swap Object
  * @constructor FixedSwapContract
